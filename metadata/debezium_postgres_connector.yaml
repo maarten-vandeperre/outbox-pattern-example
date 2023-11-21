@@ -1,0 +1,23 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    strimzi.io/cluster: my-connect-cluster
+  name: postgres-debezium-connector
+  namespace: maarten-kafka
+spec:
+  class: io.debezium.connector.postgresql.PostgresConnector
+  config:
+    plugin.name: pgoutput
+    database.hostname: postgres.maarten-kafka.svc.cluster.local
+    database.port: 5432
+    database.user: admin
+    database.password: quarkus
+    database.dbname: master_database
+    database.server.name: master_database
+    schema.include.list: public
+    table.include.list: public.person
+    database.history.kafka.topic: dbhistory.master_database
+    database.history.kafka.bootstrap.servers: 'my-cluster-kafka-bootstrap.maarten-kafka.svc.cluster.local:9092'
+    topic.prefix: master_database_data_changed
+  tasksMax: 1
