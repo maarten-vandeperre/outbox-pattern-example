@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: 'route-master-application'
+  namespace: maarten-kafka
+  labels:
+    app: 'master-application'
+    app.kubernetes.io/component: 'master-application'
+    app.kubernetes.io/instance: 'master-application'
+    app.kubernetes.io/name: 'master-application'
+    app.kubernetes.io/part-of: 'master-application'
+spec:
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: 'master-application'

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 'master-application'
+  namespace: maarten-kafka
+  labels:
+    app: 'master-application'
+    app.kubernetes.io/component: 'master-application'
+    app.kubernetes.io/instance: 'master-application'
+    app.kubernetes.io/name: 'master-application'
+    app.kubernetes.io/part-of: 'master-application'
+spec:
+  ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: 'master-application'
+    deployment: 'master-application'
+  type: ClusterIP
