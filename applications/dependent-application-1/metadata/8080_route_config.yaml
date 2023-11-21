@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: 'route-dependent-application-1'
+  namespace: maarten-kafka
+  labels:
+    app: 'dependent-application-1'
+    app.kubernetes.io/component: 'dependent-application-1'
+    app.kubernetes.io/instance: 'dependent-application-1'
+    app.kubernetes.io/name: 'dependent-application-1'
+    app.kubernetes.io/part-of: 'dependent-application-1'
+spec:
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: 'dependent-application-1'

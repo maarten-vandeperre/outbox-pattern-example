@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: maarten-kafka
+  name: 'dependent-application-1'
+  annotations: {}
+  labels:
+    app: 'dependent-application-1'
+    app.kubernetes.io/component: 'dependent-application-1'
+    app.kubernetes.io/instance: 'dependent-application-1'
+    app.kubernetes.io/name: 'dependent-application-1'
+    app.kubernetes.io/part-of: 'dependent-application-1'
+    app.openshift.io/runtime-namespace: maarten-kafka
+spec:
+  selector:
+    matchLabels:
+      app: 'dependent-application-1'
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: 'dependent-application-1'
+        app.kubernetes.io/component: 'dependent-application-1'
+        app.kubernetes.io/name: 'dependent-application-1'
+        deployment: 'dependent-application-1'
+    spec:
+      containers:
+        - name: container
+          image: >-
+            quay.io/appdev_playground/outbox-pattern-example:dependent-application-1-0.0.5
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: quarkus.datasource.jdbc.url
+              value: >-
+                jdbc:postgresql://postgres.maarten-kafka.svc.cluster.local:5432/master_database
+            - name: quarkus.datasource.reactive.url
+              value: >-
+                jdbc:postgresql://postgres.maarten-kafka.svc.cluster.local:5432/master_database
+            - name: quarkus.datasource.username
+              value: admin
+            - name: quarkus.datasource.password
+              value: quarkus
+      imagePullSecrets: []
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  paused: false
