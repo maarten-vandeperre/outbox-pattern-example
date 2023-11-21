@@ -15,6 +15,7 @@ rootProject.name="outbox-pattern-example"
 include(":applications:master-application")
 include(":applications:dependent-application-1")
 include(":applications:dependent-application-indexer-1")
+include(":applications:dependent-application-camel-indexer-1")
 
 
 

@@ -25,6 +25,7 @@ subprojects {
 
     dependencies {
         implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+        implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-camel-bom:${quarkusPlatformVersion}"))
         implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
         implementation("io.quarkus:quarkus-resteasy-reactive")
         implementation("io.quarkus:quarkus-kotlin")
