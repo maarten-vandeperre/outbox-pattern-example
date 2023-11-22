@@ -7,6 +7,6 @@ spec:
   template:
     spec:
       containers:
-        - image: quay.io/appdev_playground/outbox-pattern-example:dependent-application-indexer-1-0.0.5
+        - image: quay.io/appdev_playground/outbox-pattern-example:dependent-application-indexer-1-0.0.6
           ports:
             - containerPort: 8080

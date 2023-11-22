@@ -27,7 +27,7 @@ spec:
       containers:
         - name: container
           image: >-
-            quay.io/appdev_playground/outbox-pattern-example:dependent-application-1-0.0.10
+            quay.io/appdev_playground/outbox-pattern-example:dependent-application-1-0.0.13
           ports:
             - containerPort: 8080
               protocol: TCP
