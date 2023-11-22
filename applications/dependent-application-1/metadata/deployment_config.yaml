@@ -27,21 +27,16 @@ spec:
       containers:
         - name: container
           image: >-
-            quay.io/appdev_playground/outbox-pattern-example:dependent-application-1-0.0.5
+            quay.io/appdev_playground/outbox-pattern-example:dependent-application-1-0.0.10
           ports:
             - containerPort: 8080
               protocol: TCP
           env:
-            - name: quarkus.datasource.jdbc.url
+            - name: quarkus.mongodb.connection-string
               value: >-
-                jdbc:postgresql://postgres.maarten-kafka.svc.cluster.local:5432/master_database
-            - name: quarkus.datasource.reactive.url
-              value: >-
-                jdbc:postgresql://postgres.maarten-kafka.svc.cluster.local:5432/master_database
-            - name: quarkus.datasource.username
-              value: admin
-            - name: quarkus.datasource.password
-              value: quarkus
+                mongodb://admin:quarkus@mongodb.maarten-kafka.svc.cluster.local:27017
+            - name: quarkus.mongodb.database
+              value: people-database
       imagePullSecrets: []
   strategy:
     type: RollingUpdate

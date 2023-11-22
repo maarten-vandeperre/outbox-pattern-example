@@ -1,5 +1,5 @@
 #!/bin/sh
-VERSION=0.0.5
+VERSION=0.0.10
 
 ./gradlew :applications:dependent-application-1:build -Dquarkus.package.type=uber-jar
 docker build -t quay.io/appdev_playground/outbox-pattern-example:dependent-application-1-$VERSION -f applications/dependent-application-1/metadata/Dockerfile applications/dependent-application-1 --platform linux/amd64
