@@ -15,6 +15,7 @@ class IndexerResource(
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     fun index(): Response {
+        mongoPersonRepository.deleteAll()
         val indexedPeople = postgresPersonRepository.all()
             .map {
                 MongoPerson(
@@ -24,7 +25,6 @@ class IndexerResource(
                     birthDate = it.birthDate
                 )
             }
-        mongoPersonRepository.deleteAll()
         mongoPersonRepository.persist(indexedPeople)
         return Response.ok("ended").build()
     }
